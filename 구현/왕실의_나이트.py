@@ -3,4 +3,5 @@ location = input()
 line = int(location[1])
 row = int('location[0]')-int('a') + 1
 
+move = [(-2,1), (-2, -1), (2, 1), (2, -1), (1, 2), (-1, 2), (1, -2), (-1, -2)]
 print(row)
