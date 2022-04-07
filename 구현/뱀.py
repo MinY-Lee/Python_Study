@@ -1,7 +1,7 @@
 # 보드 크기 입력받기
 n = int(input())
 # 사과 갯수 입력받기
-apple = int(input())
+k = int(input())
 
 # 리스트 컴프리헨션을 사용한다(이차원 배열의 초기화의 경우 반드시!)
 data = [[0] * (n + 1) for _ in range(n + 1)]    # 맵 정보
@@ -11,7 +11,7 @@ data = [[0] * (n + 1) for _ in range(n + 1)]    # 맵 정보
 info = []   # 방향 회전 정보
 
 # 맵 정보(사과가 있는 곳은 1로 표시)
-for _ in range(apple):
+for _ in range(k):
     a, b = map(int, input().split())
     data[a][b] = 1
     
@@ -27,7 +27,7 @@ dy = [1, 0, -1, 0]
 
 def turn(direction, c):
     if c == "L":    # 왼쪽으로 도는거면
-        direction = (direction -1) % 4      # 왜..?? 이 부분 이해가 안감
+        direction = (direction - 1) % 4      # 왜..?? 이 부분 이해가 안감
     else:
         direction = (direction + 1) % 4
     return direction
@@ -39,6 +39,7 @@ def simulate():
     time = 0    # 시작한 뒤에 지난 '초' 시간
     index = 0   # 다음에 회전할 정보
     q = [(x, y)]    # 뱀이 차지하고 있는 위치 정보(꼬리가 앞쪽)
+    
     while True:
         nx = x + dx[direction]
         ny = y + dy[direction]
@@ -46,7 +47,7 @@ def simulate():
         if 1 <= nx and nx <= n and 1 <= ny and ny <= n and data[nx][ny] != 2:
             # 사과가 없다면 이동 후에 꼬리 제거
             if data[nx][ny] == 0:
-                data[nx][ny] =2
+                data[nx][ny] = 2
                 q.append((nx, ny))
                 px, py = q.pop(0)
                 data[px][py] = 0
@@ -60,7 +61,8 @@ def simulate():
             break
         x, y = nx, ny   # 다음 위치로 머리를 이동
         time += 1
-        if index < 1 and time == info[index][0]:    # 회전할 시간인 경우 회전
+        # index < l 인데 1로 써서 오류 난 거였음. 주의!!!
+        if index < l and time == info[index][0]:    # 회전할 시간인 경우 회전
             direction = turn(direction, info[index][1])
             index += 1
     return time
