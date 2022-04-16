@@ -5,7 +5,7 @@
 
 # 현재 설치된 구조물이 '가능한' 구조물인지 확인하는 함수
 def possible(answer):
-    for x, y, stuff in answer:
+    for x, y, stuff in answer:  # answer에 뭐가 어떻게 들어가는지를 모르겠음...******************
         if stuff == 0:  # 설치된 것이 '기둥'인 경우
             # '바닥 위' 혹은 '보의 한쪽 끝부분 위' 혹은 '다른 기둥 위'라면 정상
             if y == 0 or [x - 1, y, 1] in answer or [x, y, 1] in answer or [x, y -1, 0] in answer:
@@ -18,7 +18,7 @@ def possible(answer):
             return False    # 아니라면 거짓(False) 반환
     return True
 
-def solution(n, build_frame):
+def solution(n, build_frame):   # n = 칸 수, build_frame = [x, y, 종류, 설치/제거]
     answer = []
     for frame in build_frame:   # 작업(frame)의 개수는 최대 1,000개
         x, y, stuff, operate = frame
